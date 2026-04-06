@@ -8,7 +8,7 @@ pipeline {
 
     // This tells Jenkins to use the 'M3' Maven configuration you just set up
     tools {
-        maven 'M3' 
+        maven 'Maven' 
     }
 
     stages {
