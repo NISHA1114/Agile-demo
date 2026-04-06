@@ -1,0 +1,35 @@
+pipeline {
+    agent any
+
+    environment {
+        KUBECONFIG = 'C:\\ProgramData\\Jenkins\\.kube\\config'
+    }
+
+    stages {
+
+        stage('Clone Repository') {
+            steps {
+                git branch: 'main', url: 'https://github.com/NISHA1114/Agile-demo.git'
+            }
+        }
+
+        stage('Build Maven') {
+            steps {
+                bat 'mvn clean package'
+            }
+        }
+
+        stage('Docker Build') {
+            steps {
+                bat 'docker build -t springboot-app .'
+            }
+        }
+
+        stage('Deploy to Kubernetes') {
+            steps {
+                bat 'kubectl apply -f deployment.yaml --validate=false'
+            }
+        }
+
+    }
+}
