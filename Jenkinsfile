@@ -3,7 +3,7 @@ pipeline {
 
     // This environment variable helps Jenkins find your K8s config
     environment {
-        KUBECONFIG = 'C:\\ProgramData\\Jenkins\\.kube\\config'
+        KUBECONFIG = 'C:\Users\nisha\.kube\\config'
     }
 
     // This tells Jenkins to use the 'M3' Maven configuration you just set up
