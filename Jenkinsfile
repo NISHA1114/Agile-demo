@@ -1,12 +1,17 @@
 pipeline {
     agent any
 
+    // This environment variable helps Jenkins find your K8s config
     environment {
         KUBECONFIG = 'C:\\ProgramData\\Jenkins\\.kube\\config'
     }
 
-    stages {
+    // This tells Jenkins to use the 'M3' Maven configuration you just set up
+    tools {
+        maven 'M3' 
+    }
 
+    stages {
         stage('Clone Repository') {
             steps {
                 git branch: 'main', url: 'https://github.com/NISHA1114/Agile-demo.git'
@@ -15,6 +20,7 @@ pipeline {
 
         stage('Build Maven') {
             steps {
+                // This will now work because of the tools block above
                 bat 'mvn clean package'
             }
         }
@@ -30,6 +36,5 @@ pipeline {
                 bat 'kubectl apply -f deployment.yaml --validate=false'
             }
         }
-
     }
 }
